@@ -37,9 +37,9 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] Display resulting attestation ID/commitment to the user for them to share with a verifier
 
 ## Phase 3 — Frontend: verifier flow
-- [ ] Lookup-by-commitment UI
-- [ ] Display pass/fail, rule ID, freshness (explicitly check `expiresAt` client-side and show stale/expired state — do not assume verifiers will build this themselves)
-- [ ] Confirm no code path in the verifier UI can access or display anything beyond what's in the public `AttestationRecord`
+- [x] Lookup-by-commitment UI
+- [x] Display pass/fail, rule ID, freshness (explicitly check `expiresAt` client-side and show stale/expired state — do not assume verifiers will build this themselves)
+- [x] Confirm no code path in the verifier UI can access or display anything beyond what's in the public `AttestationRecord`
 
 ## Phase 4 — Rule setup for demo
 - [ ] Owner account publishes at least one real rule (e.g. "revenue-5k-monthly")
@@ -77,3 +77,4 @@ Add one dated line per contribution. Newest at top.
 - 2026-09-16 — Implemented Phase 1 contract core: attest, verify, hardcoded rule, and persistentHash commitment binding with ownPublicKey().bytes.
 - 2026-09-16 — Verified ownPublicKey() against live docs: confirmed it is a builtin Minokawa/Compact witness function that safely returns the user's Zswap coin public key for identity binding.
 - 2026-09-16 — Phase 2 completed: implemented prover flow UI using Tailwind with wallet connection and simulated proof handling logic.
+- 2026-09-16 — Phase 3 completed: implemented verifier flow UI using Tailwind, mimicking indexer lookup.

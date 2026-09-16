@@ -205,20 +205,114 @@ function ProverFlow({ walletApi }: { walletApi: DAppConnectorAPI | null }) {
 }
 
 function VerifierFlow() {
+  const [commitment, setCommitment] = useState('');
+  const [status, setStatus] = useState<'idle' | 'verifying' | 'success' | 'error'>('idle');
+
+  const handleVerify = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!commitment) return;
+
+    setStatus('verifying');
+
+    try {
+      // Mocking the verification process for now
+      // This will be replaced with actual Midnight.js ledger lookup
+      await new Promise(resolve => setTimeout(resolve, 1500));
+      
+      // We'll simulate success if the hash is somewhat long, else error
+      if (commitment.length > 30) {
+        setStatus('success');
+      } else {
+        setStatus('error');
+      }
+    } catch (err) {
+      console.error(err);
+      setStatus('error');
+    }
+  };
+
   return (
     <div className="space-y-8 animate-in fade-in slide-in-from-bottom-4 duration-500 ease-out">
       <div>
         <h1 className="text-2xl font-semibold tracking-tight">Verify Attestation</h1>
         <p className="text-neutral-500 mt-2">
-          Enter a commitment hash to verify if an identity has met the required threshold.
+          Lookup a commitment hash on the ledger to confirm it exists and corresponds to a valid threshold proof.
         </p>
       </div>
-      
+
       <div className="bg-white border border-neutral-200 rounded-xl p-6 shadow-sm">
-        <div className="text-center py-12 text-neutral-500">
-          Verifier flow coming in Phase 3.
-        </div>
+        <form onSubmit={handleVerify} className="space-y-4">
+          <div className="space-y-1.5">
+            <label htmlFor="commitment" className="text-sm font-medium block">
+              Commitment Hash
+            </label>
+            <input 
+              id="commitment"
+              type="text" 
+              value={commitment}
+              onChange={(e) => setCommitment(e.target.value)}
+              placeholder="0x..."
+              className="w-full px-4 py-2 border border-neutral-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-neutral-900 focus:border-transparent transition-all disabled:bg-neutral-50 disabled:text-neutral-500 font-mono text-sm"
+              disabled={status === 'verifying'}
+            />
+          </div>
+
+          <button 
+            type="submit"
+            disabled={status === 'verifying' || !commitment}
+            className="w-full flex items-center justify-center gap-2 bg-neutral-900 text-white py-2.5 rounded-lg font-medium hover:bg-neutral-800 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-neutral-900 disabled:opacity-50 disabled:cursor-not-allowed transition-all"
+          >
+            {status === 'verifying' ? (
+              <>
+                <Loader2 className="w-4 h-4 animate-spin" />
+                Querying Ledger...
+              </>
+            ) : (
+              <>
+                Verify Record
+                <ArrowRight className="w-4 h-4" />
+              </>
+            )}
+          </button>
+        </form>
       </div>
+
+      {status === 'success' && (
+        <div className="bg-white border border-green-200 rounded-xl p-6 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300">
+          <div className="flex items-start gap-3">
+            <CheckCircle className="w-5 h-5 text-green-600 mt-0.5 shrink-0" />
+            <div className="w-full">
+              <h3 className="font-medium text-green-900">Valid Attestation Found</h3>
+              <p className="text-sm text-green-700 mt-1">This commitment exists on-chain and represents a passed threshold for <span className="font-mono text-xs bg-green-100 text-green-800 px-1 py-0.5 rounded">rule-1</span>.</p>
+              
+              <div className="mt-4 grid grid-cols-2 gap-4 pt-4 border-t border-green-100">
+                <div>
+                  <div className="text-xs font-medium text-green-800 uppercase tracking-wider">Timestamp</div>
+                  <div className="text-sm text-green-900 mt-0.5">{new Date().toLocaleDateString()} (Mock)</div>
+                </div>
+                <div>
+                  <div className="text-xs font-medium text-green-800 uppercase tracking-wider">Status</div>
+                  <div className="text-sm text-green-900 mt-0.5">Verified</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {status === 'error' && (
+        <div className="bg-white border border-red-200 rounded-xl p-6 shadow-sm animate-in fade-in slide-in-from-bottom-2 duration-300">
+          <div className="flex items-start gap-3">
+            <XCircle className="w-5 h-5 text-red-600 mt-0.5 shrink-0" />
+            <div>
+              <h3 className="font-medium text-red-900">Record Not Found</h3>
+              <p className="text-sm text-red-700 mt-1">
+                The provided hash does not correspond to any valid attestation on the ledger. It may be incorrect, or the proof may not have been submitted yet.
+              </p>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 }
