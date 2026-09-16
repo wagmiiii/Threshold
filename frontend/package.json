@@ -36,6 +36,7 @@
     "tailwindcss-animate": "^1.0.7",
     "typescript": "^5.0.2",
     "vite": "^4.4.5",
+    "vite-plugin-node-polyfills": "^0.28.0",
     "vite-plugin-top-level-await": "^1.6.0",
     "vite-plugin-wasm": "^3.6.0"
   }
