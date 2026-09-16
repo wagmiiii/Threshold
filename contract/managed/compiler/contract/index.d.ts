@@ -14,14 +14,14 @@ export type Witnesses<PS> = {
 }
 
 export type ImpureCircuits<PS> = {
-  attest(context: __compactRuntime.CircuitContext<PS>, ruleId_0: bigint): Promise<__compactRuntime.CircuitResults<PS, []>>;
+  attest(context: __compactRuntime.CircuitContext<PS>, ruleId_0: bigint): Promise<__compactRuntime.CircuitResults<PS, Uint8Array>>;
   verify(context: __compactRuntime.CircuitContext<PS>,
          commitment_0: Uint8Array,
          ruleId_0: bigint): Promise<__compactRuntime.CircuitResults<PS, AttestationRecord>>;
 }
 
 export type ProvableCircuits<PS> = {
-  attest(context: __compactRuntime.CircuitContext<PS>, ruleId_0: bigint): Promise<__compactRuntime.CircuitResults<PS, []>>;
+  attest(context: __compactRuntime.CircuitContext<PS>, ruleId_0: bigint): Promise<__compactRuntime.CircuitResults<PS, Uint8Array>>;
   verify(context: __compactRuntime.CircuitContext<PS>,
          commitment_0: Uint8Array,
          ruleId_0: bigint): Promise<__compactRuntime.CircuitResults<PS, AttestationRecord>>;
@@ -31,7 +31,7 @@ export type PureCircuits = {
 }
 
 export type Circuits<PS> = {
-  attest(context: __compactRuntime.CircuitContext<PS>, ruleId_0: bigint): Promise<__compactRuntime.CircuitResults<PS, []>>;
+  attest(context: __compactRuntime.CircuitContext<PS>, ruleId_0: bigint): Promise<__compactRuntime.CircuitResults<PS, Uint8Array>>;
   verify(context: __compactRuntime.CircuitContext<PS>,
          commitment_0: Uint8Array,
          ruleId_0: bigint): Promise<__compactRuntime.CircuitResults<PS, AttestationRecord>>;

@@ -187,7 +187,7 @@ export class Contract {
         const result_0 = await this._attest_0(context,
                                               partialProofData,
                                               ruleId_0);
-        partialProofData.output = { value: [], alignment: [] };
+        partialProofData.output = { value: _descriptor_0.toValue(result_0), alignment: _descriptor_0.alignment() };
         __compactRuntime.finalizeCallProofData(context, partialProofData);
         return { result: result_0, context: context, gasCost: context.callContext.currentGasCost };
       },
@@ -201,21 +201,21 @@ export class Contract {
         if (!(typeof(contextOrig_0) === 'object' && contextOrig_0.callContext.currentQueryContext != undefined)) {
           __compactRuntime.typeError('verify',
                                      'argument 1 (as invoked from Typescript)',
-                                     'threshold.compact line 63 char 1',
+                                     'threshold.compact line 65 char 1',
                                      'CircuitContext',
                                      contextOrig_0)
         }
         if (!(commitment_0.buffer instanceof ArrayBuffer && commitment_0.BYTES_PER_ELEMENT === 1 && commitment_0.length === 32)) {
           __compactRuntime.typeError('verify',
                                      'argument 1 (argument 2 as invoked from Typescript)',
-                                     'threshold.compact line 63 char 1',
+                                     'threshold.compact line 65 char 1',
                                      'Bytes<32>',
                                      commitment_0)
         }
         if (!(typeof(ruleId_0) === 'bigint' && ruleId_0 >= 0n && ruleId_0 <= 18446744073709551615n)) {
           __compactRuntime.typeError('verify',
                                      'argument 2 (argument 3 as invoked from Typescript)',
-                                     'threshold.compact line 63 char 1',
+                                     'threshold.compact line 65 char 1',
                                      'Uint<0..18446744073709551616>',
                                      ruleId_0)
         }
@@ -449,7 +449,14 @@ export class Contract {
                                                                                               alignment: _descriptor_3.alignment() }).encode() } },
                                        { ins: { cached: false, n: 1 } },
                                        { ins: { cached: true, n: 1 } }]);
-    return [];
+    return this._persistentHash_0({ value:
+                                      this._getPrivateValue_0(context,
+                                                              partialProofData),
+                                    salt:
+                                      this._getSalt_0(context, partialProofData),
+                                    pk:
+                                      this._ownPublicKey_0(context,
+                                                           partialProofData).bytes });
   }
   async _verify_0(context, partialProofData, commitment_0, ruleId_0) {
     let tmp_0;
@@ -739,7 +746,7 @@ export const pureCircuits = {};
 export const contractReferenceLocations =
   { tag: 'publicLedgerArray', indices: { } };
 export const expectedVk = {
-  'attest': 'c903a8691373240aafbe7e3cc3384b04fd5dfd25ee845ee55daefbc0c310184f',
+  'attest': '75d7b236c981981e91fa9b2661a10862c562f009b747757e1ad2c985da86e98a',
   'verify': '1dcf0f7ca337ad1472ece26b57bd2dc9db888bbbed2f3a27277b726e5d908150',
 };
 

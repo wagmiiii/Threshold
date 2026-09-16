@@ -94,7 +94,7 @@ These witnesses cannot write to ledger state themselves; their return values are
 ### Circuits (on-chain, proof-verified)
 - `circuit attest(ruleId: Field): []` — pulls `getPrivateValue()` and `getSalt()` via witness calls, looks up the `ThresholdRule` for `ruleId`, evaluates the comparison, computes the commitment via `transientCommit`/`persistentHash`, and — only if the comparison holds — writes a new `AttestationRecord` with `passed: true`. If the comparison does not hold, the circuit either writes `passed: false` or (safer default, avoids any on-chain trace of a failed attempt) simply does not submit — this decision is a v1 open question, see essentials doc.
 - `circuit publishRule(ruleId, comparisonType, thresholdValue, description): []` — admin/verifier-only in the demo; writes to `rules`. No privacy requirement here since rule terms are meant to be public.
-- `circuit verify(commitment: Bytes<32>): AttestationRecord` — pure read against `attestations`, callable by anyone (the whole point is public verifiability of the result without private data).
+- `circuit verify(commitment: Bytes<32>, ruleId: Field): AttestationRecord` — pure read against `attestations`, callable by anyone (the whole point is public verifiability of the result without private data).
 
 ## Security and privacy boundaries (must hold, not aspirational)
 1. `rawValue` must never appear in any circuit's exported return value or any ledger field without an explicit `disclose()` call — and no such call should exist in this build. If the compiler ever requires one to make the code build, that's a signal the circuit design leaked private data and needs to be restructured, not disclosed around.

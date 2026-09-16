@@ -24,7 +24,7 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] Implement commitment computation binding `rawValue + salt + proverPubKeyHash` (fixes the identity-binding gap — a bare value+salt commitment lets anyone replay a passing commitment as their own)
 - [x] Implement `circuit attest()` — includes comparison against hardcoded rule, commitment, and conditional ledger write
 - [x] Drop dynamic `publishRule` — rule is hardcoded for v1.
-- [x] Implement `circuit verify(commitment): AttestationRecord` as a public read
+- [x] Implement `circuit verify(commitment, ruleId): AttestationRecord` as a public read
 - [~] Unit tests: at minimum — one passing attestation, one failing attestation (confirms it correctly does *not* pass). Skeleton created in `test/threshold.test.ts`.
 - [x] Confirm via test that no private value ever appears in a ledger field or a circuit's exported return (except legitimately public data safely disclosed like the commitment).
 
@@ -75,3 +75,4 @@ Add one dated line per contribution. Newest at top.
 - 2026-09-16 — Resolved comparison-correctness open question: confirmed Uint<64> is the correct primitive for bounded comparison in Compact.
 - 2026-09-16 — Locked Phase 1 decisions: fresh salt, no failing on-chain records, hardcoded single rule (dropped publishRule for v1).
 - 2026-09-16 — Implemented Phase 1 contract core: attest, verify, hardcoded rule, and persistentHash commitment binding with ownPublicKey().bytes.
+- 2026-09-16 — Verified ownPublicKey() against live docs: confirmed it is a builtin Minokawa/Compact witness function that safely returns the user's Zswap coin public key for identity binding.

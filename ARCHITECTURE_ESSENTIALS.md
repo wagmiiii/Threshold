@@ -32,7 +32,7 @@ witness getSalt(): Field           # local only
 
 circuit attest(ruleId): []          # pulls witnesses, compares, writes AttestationRecord if pass
 circuit publishRule(...): []        # admin-only, writes rules (public terms, no privacy need)
-circuit verify(commitment): AttestationRecord   # public read
+circuit verify(commitment, ruleId): AttestationRecord   # public read
 ```
 
 ## v1 scope lock

@@ -112,6 +112,19 @@
     { "op": "pi_skip", "guard": 1, "count": 1 },
     { "op": "load_imm", "imm": "A1" },
     { "op": "declare_pub_input", "var": 34 },
-    { "op": "pi_skip", "guard": 1, "count": 1 }
+    { "op": "pi_skip", "guard": 1, "count": 1 },
+    { "op": "private_input", "guard": null },
+    { "op": "constrain_bits", "var": 35, "bits": 64 },
+    { "op": "private_input", "guard": null },
+    { "op": "constrain_bits", "var": 36, "bits": 8 },
+    { "op": "private_input", "guard": null },
+    { "op": "constrain_bits", "var": 37, "bits": 248 },
+    { "op": "private_input", "guard": null },
+    { "op": "constrain_bits", "var": 38, "bits": 8 },
+    { "op": "private_input", "guard": null },
+    { "op": "constrain_bits", "var": 39, "bits": 248 },
+    { "op": "persistent_hash", "alignment": [{ "tag": "atom", "value": { "length": 8, "tag": "bytes" } }, { "tag": "atom", "value": { "length": 32, "tag": "bytes" } }, { "tag": "atom", "value": { "length": 32, "tag": "bytes" } }], "inputs": [35, 36, 37, 38, 39] },
+    { "op": "output", "var": 40 },
+    { "op": "output", "var": 41 }
   ]
 }

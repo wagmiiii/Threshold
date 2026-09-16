@@ -4,8 +4,9 @@ describe('Threshold Contract', () => {
   let contract: Contract<any, Witnesses<any>>;
 
   beforeEach(() => {
-    // Boilerplate for Midnight testkit setup would go here
-    // e.g. instantiating the contract with mocked witnesses
+    // Boilerplate for Midnight network setup goes here:
+    // We must connect to the local Midnight docker network (proof server, local node)
+    // using @midnight-ntwrk/midnight-js providers rather than mocking manually.
   });
 
   it('should pass attestation when private value >= threshold', async () => {

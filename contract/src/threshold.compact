@@ -40,7 +40,7 @@ struct AttestationKeyData {
   ruleId: Uint<64>
 }
 
-export circuit attest(ruleId: Uint<64>): [] {
+export circuit attest(ruleId: Uint<64>): Bytes<32> {
   assert(rules.member(disclose(ruleId)), "Rule does not exist");
   assert(getPrivateValue() >= rules.lookup(disclose(ruleId)).thresholdValue, "Threshold not met");
   
@@ -58,6 +58,8 @@ export circuit attest(ruleId: Uint<64>): [] {
       expiresAt: 0 as Uint<64>
     }
   );
+  
+  return disclose(persistentHash<CommitmentData>(CommitmentData { value: getPrivateValue(), salt: getSalt(), pk: ownPublicKey().bytes }));
 }
 
 export circuit verify(commitment: Bytes<32>, ruleId: Uint<64>): AttestationRecord {
