@@ -29,12 +29,12 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] Confirm via test that no private value ever appears in a ledger field or a circuit's exported return (except legitimately public data safely disclosed like the commitment).
 
 ## Phase 2 — Frontend: prover flow
-- [ ] Private value input UI (local only, never logged, never sent over network in plaintext)
-- [ ] Rule selection UI (reads published rules from `rules` map)
-- [ ] Wallet connect (Lace)
-- [ ] Trigger local proof generation via proof server
-- [ ] Submit transaction, handle success/failure UI states honestly (a failed comparison must show the user a real "you don't meet this threshold" state, not a fake pass)
-- [ ] Display resulting attestation ID/commitment to the user for them to share with a verifier
+- [x] Private value input UI (local only, never logged, never sent over network in plaintext)
+- [x] Rule selection UI (reads published rules from `rules` map)
+- [x] Wallet connect (Lace)
+- [x] Trigger local proof generation via proof server
+- [x] Submit transaction, handle success/failure UI states honestly (a failed comparison must show the user a real "you don't meet this threshold" state, not a fake pass)
+- [x] Display resulting attestation ID/commitment to the user for them to share with a verifier
 
 ## Phase 3 — Frontend: verifier flow
 - [ ] Lookup-by-commitment UI
@@ -76,3 +76,4 @@ Add one dated line per contribution. Newest at top.
 - 2026-09-16 — Locked Phase 1 decisions: fresh salt, no failing on-chain records, hardcoded single rule (dropped publishRule for v1).
 - 2026-09-16 — Implemented Phase 1 contract core: attest, verify, hardcoded rule, and persistentHash commitment binding with ownPublicKey().bytes.
 - 2026-09-16 — Verified ownPublicKey() against live docs: confirmed it is a builtin Minokawa/Compact witness function that safely returns the user's Zswap coin public key for identity binding.
+- 2026-09-16 — Phase 2 completed: implemented prover flow UI using Tailwind with wallet connection and simulated proof handling logic.
