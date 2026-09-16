@@ -7,6 +7,11 @@
   </head>
   <body>
     <div id="root"></div>
+    <script>
+      window.addEventListener("error", function(e) {
+        document.body.innerHTML += "<div style=\"color:red;padding:20px;font-family:monospace;z-index:9999;position:relative;\">HTML GLOBAL ERROR: " + e.message + "</div>";
+      });
+    </script>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>
