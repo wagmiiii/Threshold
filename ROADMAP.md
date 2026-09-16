@@ -46,11 +46,11 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] Confirm rule terms display correctly and are genuinely public (no private data leaked in `description` field)
 
 ## Phase 5 — Integration and testnet verification
-- [ ] Full happy path end to end on testnet: enter value → prove → submit → verify from a separate session/browser
-- [ ] Full failing path end to end: value below threshold → confirm no false-positive attestation is ever produced
-- [ ] Confirm commitment reuse across two different rules does not overwrite either record (tests the map-keying fix)
-- [ ] Confirm a stale/expired attestation is correctly flagged by the verifier UI
-- [ ] Redeploy contract at least once during dev and confirm proof server keys are regenerated/matched — this is the "stale proving keys after redeploy" failure mode identified in review; catch it before demo day, not during
+- [x] Full happy path end to end on testnet: enter value → prove → submit → verify from a separate session/browser
+- [x] Full failing path end to end: value below threshold → confirm no false-positive attestation is ever produced
+- [x] Confirm commitment reuse across two different rules does not overwrite either record (tests the map-keying fix)
+- [x] Confirm a stale/expired attestation is correctly flagged by the verifier UI
+- [x] Redeploy contract at least once during dev and confirm proof server keys are regenerated/matched — this is the "stale proving keys after redeploy" failure mode identified in review; catch it before demo day, not during
 
 ## Phase 6 — Demo readiness
 - [ ] Pre-demo checklist written and rehearsed: proof server running, wallet funded, rule published, network reachable
