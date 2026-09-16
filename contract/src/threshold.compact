@@ -1,0 +1,71 @@
+pragma language_version >= 0.14.0;
+import CompactStandardLibrary;
+
+export struct ThresholdRule {
+  thresholdValue: Uint<64>,
+  description: Bytes<64>
+}
+
+export struct AttestationRecord {
+  passed: Boolean,
+  ruleId: Uint<64>,
+  issuedAt: Uint<64>,
+  expiresAt: Uint<64>
+}
+
+export ledger rules: Map<Uint<64>, ThresholdRule>;
+export ledger attestations: Map<Bytes<32>, AttestationRecord>;
+
+constructor() {
+  rules.insert(
+    1 as Uint<64>,
+    ThresholdRule { 
+      thresholdValue: 5000 as Uint<64>, 
+      description: pad(64, "revenue-5k-monthly")
+    }
+  );
+}
+
+witness getPrivateValue(): Uint<64>;
+witness getSalt(): Bytes<32>;
+
+struct CommitmentData {
+  value: Uint<64>,
+  salt: Bytes<32>,
+  pk: Bytes<32>
+}
+
+struct AttestationKeyData {
+  commitment: Bytes<32>,
+  ruleId: Uint<64>
+}
+
+export circuit attest(ruleId: Uint<64>): [] {
+  assert(rules.member(disclose(ruleId)), "Rule does not exist");
+  assert(getPrivateValue() >= rules.lookup(disclose(ruleId)).thresholdValue, "Threshold not met");
+  
+  attestations.insert(
+    disclose(persistentHash<AttestationKeyData>(
+      AttestationKeyData { 
+        commitment: persistentHash<CommitmentData>(CommitmentData { value: getPrivateValue(), salt: getSalt(), pk: ownPublicKey().bytes }), 
+        ruleId: ruleId 
+      }
+    )),
+    AttestationRecord {
+      passed: true,
+      ruleId: disclose(ruleId),
+      issuedAt: 0 as Uint<64>,
+      expiresAt: 0 as Uint<64>
+    }
+  );
+}
+
+export circuit verify(commitment: Bytes<32>, ruleId: Uint<64>): AttestationRecord {
+  assert(
+    attestations.member(disclose(persistentHash<AttestationKeyData>(AttestationKeyData { commitment: commitment, ruleId: ruleId }))),
+    "Attestation not found"
+  );
+  return attestations.lookup(
+    disclose(persistentHash<AttestationKeyData>(AttestationKeyData { commitment: commitment, ruleId: ruleId }))
+  );
+}

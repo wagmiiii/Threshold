@@ -1,0 +1,9 @@
+node_modules/
+.env
+contract/managed/keys/
+contract/managed/zkir/
+contract/managed/contract/
+!contract/managed/compiler/
+dist/
+build/
+*.seed
