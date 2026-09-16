@@ -42,8 +42,8 @@ Status legend: `[ ]` not started · `[~]` in progress · `[x]` done
 - [x] Confirm no code path in the verifier UI can access or display anything beyond what's in the public `AttestationRecord`
 
 ## Phase 4 — Rule setup for demo
-- [ ] Owner account publishes at least one real rule (e.g. "revenue-5k-monthly")
-- [ ] Confirm rule terms display correctly and are genuinely public (no private data leaked in `description` field)
+- [x] Owner account publishes at least one real rule (e.g. "revenue-5k-monthly") - *Done via hardcoded constructor in Phase 1*
+- [x] Confirm rule terms display correctly and are genuinely public (no private data leaked in `description` field)
 
 ## Phase 5 — Integration and testnet verification
 - [ ] Full happy path end to end on testnet: enter value → prove → submit → verify from a separate session/browser
